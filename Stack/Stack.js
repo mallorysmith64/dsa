@@ -1,23 +1,49 @@
-import StackNode from './StackNode'
-
+// create class with constructor for properties: items/data and size/count/top of array
 class Stack {
   constructor() {
-    top = null
+    this.items = [];
+    this.size = 0;
+  }
 
+  // create methods for push, pop, and peek
+  // when pushing increment the count/size
+  push(element) {
+    this.items[this.size] = element;
+    this.size++;
+    console.log(`added element: ${element}`);
   }
-  push(value) {
-    console.log("PUSH")
-    let node = new Node(value, top)
-    top = node
+
+  // when popping/deleting decrement the count/size
+  // delete item
+  pop() {
+    this.size--;
+    console.log(`removed element: ${this.items.pop()}`);
+    return this.items.pop();
   }
-  print() {
-    let ptr = top
-    while (ptr) {
-      console.log(ptr.value)
-      ptr = ptr.nextNode
-    }
-    console.log('---')
+
+  peek() {
+    console.log(`peek element: ${this.items[this.items.length - 1]}`);
+    return this.items[this.items.length - 1];
+  }
+
+  // if the size === 0 then stack is empty
+  isEmpty() {
+    return this.size === 0;
   }
 }
 
-export default Stack
+// test stack by creating new one
+const stack = new Stack();
+
+// perform operations
+stack.isEmpty();
+
+stack.push("dog");
+stack.push("cat");
+
+stack.peek()
+
+stack.push("bear");
+stack.push("owl")
+
+stack.pop("cat");
