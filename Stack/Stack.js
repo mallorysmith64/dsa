@@ -41,9 +41,9 @@ stack.isEmpty();
 stack.push("dog");
 stack.push("cat");
 
-stack.peek()
+stack.peek();
 
 stack.push("bear");
-stack.push("owl")
+stack.push("owl");
 
 stack.pop("cat");
