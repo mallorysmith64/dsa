@@ -2,7 +2,7 @@
 
 class Queue {
   constructor() {
-    this.storage = {};
+    this.storage = [];
     this.head = 0;
     this.tail = 0;
   }

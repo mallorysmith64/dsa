@@ -1,3 +1,5 @@
+// LIFO - linear data structure
+
 // create class with constructor for properties: items/data and size/count/top of array
 class Stack {
   constructor() {
