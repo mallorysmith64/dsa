@@ -4,7 +4,7 @@
 
 // link list methods include: clear(), size(), getFirst(), and getLast()
 
-// node
+// create node
 class LinkedListNode {
   constructor(data) {
     this.data = data;
@@ -13,18 +13,16 @@ class LinkedListNode {
   }
 }
 
-// 1st node
+// create linked list, head is the 1st node
 const head = new LinkedListNode(12);
 // second or next node
 head.next = new LinkedListNode(99);
 // add third or next node after that
 head.next.next = new LinkedListNode(37);
+console.log(head);
 
 // So, we have 12 -> 99 -> 37 -> null
 
-// how to traverse/travel across the data in a linked list
-let current = head;
-while (current != head) {
-    console.log(`traversed list: , ${current.data}`)
-    current = current.next
-}
+// traverse/travel across the data in a linked list
+  let list = new LinkedListNode(head)
+  console.log(`element is: ${list.data.next.data}`)
