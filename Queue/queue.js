@@ -14,21 +14,44 @@ class Queue {
     console.log(`added element: ${element}`);
   }
 
-  //removing from front - head is front
+  //method 1: remove element from front/head
+  // dequeue() {
+  //   let removed = this.storage[this.head];
+  //   delete this.storage[this.head];
+  //   this.head++;
+  //   console.log(`removed element: ${removed}`);
+  //   return removed;
+  // }
+
+  // method 2: remove element from front/head
   dequeue() {
-    let removed = this.storage[this.head];
-    delete this.storage[this.head];
-    this.head++;
-    console.log(`removed element: ${removed}`);
-    return removed;
+    if (this.isEmpty() === false) {
+      this.tail--;
+      console.log(`removed element: ${this.storage.shift()}`);
+      return this.storage.shift();
+    }
+  }
+
+  Length() {
+    console.log(`length: ${this.tail}`);
+    return this.tail;
+  }
+
+  isEmpty() {
+    if (this.rear === 0) {
+      console.log("The queue is empty!!!");
+    }
   }
 }
 
 // test queue by performing operations
 const queue = new Queue();
-queue.enqueue('seahorse')
-queue.enqueue('dolphin')
-queue.enqueue('whale shark')
+queue.enqueue("seahorse");
+queue.enqueue("dolphin");
+queue.enqueue("whale shark");
 
-queue.dequeue()
-queue.dequeue()
+queue.dequeue();
+queue.dequeue();
+
+queue.Length();
+queue.isEmpty();
