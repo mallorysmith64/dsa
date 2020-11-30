@@ -8,11 +8,25 @@ struct Node
     struct Node *next;
 };
 
-void printList(struct Node* n)
+void displayList(struct Node *n)
 {
-    while (n != NULL) {
-        printf("\n Value of Node:  %d", n-> data);
-        n = n-> next;
+    // use while loop b/c we do not know how many nodes they are
+    // print the data, then move to next node, then print the data, move to next node
+    // condition: stop when n points to NULL or 0
+    while (n != NULL)
+    {
+        printf("\n Value of Node:  %d", n->data);
+        n = n->next;
+    }
+}
+
+void reverseList(struct Node *n)
+{
+    // call function recursively and then print data until n is null or 0
+    if (n != NULL)
+    {
+        reverseList(n->next);
+        printf("\n Value of Node:  %d", n->data);
     }
 }
 
@@ -45,7 +59,8 @@ int main()
     // to terminate the list, last node points to null
     third->next = NULL;
 
-    printList(head);
+    displayList(head);
+    // reverseList(head);
 
     return 0;
 }
