@@ -15,7 +15,7 @@ void displayList(struct Node *n)
     // condition: stop when n points to NULL or 0
     while (n != NULL)
     {
-        printf("\n Value of Node:  %d", n->data);
+        printf("\n Display List:  %d", n->data);
         n = n->next;
     }
 }
@@ -26,7 +26,7 @@ void reverseList(struct Node *n)
     if (n != NULL)
     {
         reverseList(n->next);
-        printf("\n Value of Node:  %d", n->data);
+        printf("\n Reversed List:  %d", n->data);
     }
 }
 
@@ -60,7 +60,7 @@ int main()
     third->next = NULL;
 
     displayList(head);
-    // reverseList(head);
+    reverseList(head);
 
     return 0;
 }
