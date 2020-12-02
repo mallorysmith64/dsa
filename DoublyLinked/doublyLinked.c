@@ -42,6 +42,20 @@ void insert(int data)
     link->prev = current;
 }
 
+// find number of nodes in list
+int count()
+{
+    struct node *p = head;
+    int c = 0;
+    while (p != NULL)
+    {
+        c++;
+        p = p -> next;
+    }
+    printf("\n Number of nodes: %d", c);
+    return c;
+}
+
 // display the list
 void printList()
 {
@@ -67,6 +81,7 @@ int main()
     insert(8);
     insert(10);
 
+    count();
     printList();
     return 0;
 }
