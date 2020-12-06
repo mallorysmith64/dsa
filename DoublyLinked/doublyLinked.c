@@ -77,8 +77,7 @@ int recursiveAdd()
     struct node *p;
     if (p == NULL)
         return 0;
-    else
-        printf("\n Recursive sum is: %d", p->data + recursiveAdd(p->next));
+    printf("\n Recursive sum is: %d", p->data + recursiveAdd(p->next));
     return recursiveAdd(p->next) + p->data;
 }
 
@@ -94,6 +93,20 @@ int max(struct node *p)
     }
     printf("\n Max is: %d", max);
     return max;
+}
+
+// max value in linked list
+int min(struct node *p)
+{
+    int min = INT_MAX; //INT_MIN is -2147483648
+    while (p != NULL)
+    {
+        if (p->data < min)
+            min = p->data;
+        p = p->next;
+    }
+    printf("\n Min is: %d", min);
+    return min;
 }
 
 // display the list
@@ -127,6 +140,7 @@ int main()
     recursiveAdd();
 
     max(head);
+    min(head);
 
     printList();
     return 0;
