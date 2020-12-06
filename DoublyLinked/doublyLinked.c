@@ -50,10 +50,35 @@ int count()
     while (p != NULL)
     {
         c++;
-        p = p -> next;
+        p = p->next;
     }
     printf("\n Number of nodes: %d", c);
     return c;
+}
+
+// sum all the elements iteratively
+int add()
+{
+    struct node *p = head;
+    int sum = 0;
+    while (p)
+    {
+        sum = sum + p->data;
+        p = p->next;
+    }
+    printf("\n Sum of all the elements: %d", sum);
+    return (sum);
+}
+
+// issue with adding recursively! 
+int recursiveAdd()
+{
+    struct node *p;
+    if (p == NULL)
+        return 0;
+    else
+        printf("\n Recursive sum is: %d", p->data + recursiveAdd(p->next));
+        return recursiveAdd(p->next) + p->data;
 }
 
 // display the list
@@ -82,6 +107,8 @@ int main()
     insert(10);
 
     count();
+    add();
+    recursiveAdd();
     printList();
     return 0;
 }
