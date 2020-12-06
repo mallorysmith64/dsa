@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h> //needed for INT_MIN
 
 // doubly linked list has 2 pointers: next and prev
 struct node
@@ -9,7 +10,7 @@ struct node
     struct node *next;
 };
 
-struct node *head = NULL;
+struct node *head = NULL; //global decration of head node
 struct node *tail = NULL;
 struct node *current = NULL;
 
@@ -70,7 +71,7 @@ int add()
     return (sum);
 }
 
-// issue with adding recursively! 
+// issue with adding recursively!
 int recursiveAdd()
 {
     struct node *p;
@@ -78,7 +79,21 @@ int recursiveAdd()
         return 0;
     else
         printf("\n Recursive sum is: %d", p->data + recursiveAdd(p->next));
-        return recursiveAdd(p->next) + p->data;
+    return recursiveAdd(p->next) + p->data;
+}
+
+// max value in linked list
+int max(struct node *p)
+{
+    int max = INT_MIN; //INT_MIN is -2147483648
+    while (p != NULL)
+    {
+        if (p->data > max)
+            max = p->data;
+        p = p->next;
+    }
+    printf("\n Max is: %d", max);
+    return max;
 }
 
 // display the list
@@ -107,8 +122,12 @@ int main()
     insert(10);
 
     count();
+
     add();
     recursiveAdd();
+
+    max(head);
+
     printList();
     return 0;
 }
