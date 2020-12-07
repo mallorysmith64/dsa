@@ -15,7 +15,7 @@ struct node *tail = NULL;
 struct node *current = NULL;
 
 // create the list
-void insert(int data)
+void create(int data)
 {
     // allocate memory for new node
     struct node *link = (struct node *)malloc(sizeof(struct node));
@@ -154,12 +154,40 @@ struct node *moveSearch(struct node *p, int key)
             p->next = head;
             head = p;
             printf("\n\n Node's data is %d and was moved to head.", p->data);
-            return(p);
+            return (p);
         }
         q = p;
         p = p->next;
     }
     return NULL;
+}
+
+// insert node before head and insert after given position
+void insert(struct node *p, int index, int x) //pos means position
+{
+    struct node *t;
+    int i;
+    if (index < 0 || index > count(p)) // check if index is valid or not
+        return;
+    {
+        t = (struct node *)malloc(sizeof(struct node)); //create new node called t
+        t->data = x;                                    // assign value to node t
+
+        if (index == 0) // steps for inserting before first node
+        {
+            t->next = head; // modify link 1: point t node to head
+            head = t;       // modify link 2: point head to t node
+        }
+        else
+        {
+            for (i = 0; i < index - 1; i++) // move node position - 1 times
+            {
+                p = p->next;
+                t->next = p->next;
+                p->next = t;
+            }
+        }
+    }
 }
 
 // display the list
@@ -182,10 +210,13 @@ void printList()
 
 int main()
 {
-    insert(2);
-    insert(4);
-    insert(8);
-    insert(10);
+
+    create(2);
+    create(4);
+    create(8);
+    create(10);
+
+    insert(head, 0, 6); //insert at position, index, value as integer
 
     count();
 
@@ -201,7 +232,7 @@ int main()
     rSearch(head, 2);
     rSearch(head, 0);
 
-    moveSearch(head,10);
+    moveSearch(head, 10);
 
     printList(); // list will show 10 as first node b/c of moveSearch function being called
 
