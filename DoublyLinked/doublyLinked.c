@@ -142,6 +142,26 @@ struct node *rSearch(struct node *p, int key)
     }
 }
 
+// move node to beginning via linear search
+struct node *moveSearch(struct node *p, int key)
+{
+    struct node *q = NULL;
+    while (p != NULL)
+    {
+        if (key == p->data)
+        {
+            q->next = p->next;
+            p->next = head;
+            head = p;
+            printf("\n\n Node's data is %d and was moved to head.", p->data);
+            return(p);
+        }
+        q = p;
+        p = p->next;
+    }
+    return NULL;
+}
+
 // display the list
 void printList()
 {
@@ -179,9 +199,11 @@ int main()
     search(head, 4); // should not be found in the beginning
 
     rSearch(head, 2);
-    rSearch(head,0);
+    rSearch(head, 0);
 
-    printList();
+    moveSearch(head,10);
+
+    printList(); // list will show 10 as first node b/c of moveSearch function being called
 
     return 0;
 }
