@@ -190,6 +190,26 @@ void insert(struct node *p, int index, int x) //pos means position
     }
 }
 
+void insertLast(int x)
+{
+    struct node *t;
+    t = (struct node *)(malloc(sizeof(struct node))); // create new node t
+    t->data = x;                                      // assign value to t's data
+    t->next = NULL;                                   // null is after new node
+
+    if (head == NULL)
+    { // if no nodes then make new node the head
+        head = tail = t;
+    }
+    else
+    {
+        tail->next = t; // move last node to t
+        tail = t;       // last node is t
+        printf(tail);
+        return tail;
+    }
+}
+
 // display the list
 void printList()
 {
@@ -217,6 +237,9 @@ int main()
     create(10);
 
     insert(head, 0, 6); //insert at position, index, value as integer
+
+    insertLast(14);
+    insertLast(-7);
 
     count();
 
