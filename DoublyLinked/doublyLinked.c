@@ -210,6 +210,38 @@ void insertLast(int x)
     }
 }
 
+void sortedInsert(struct node *p, int x)
+{
+    struct node *t, *q = NULL;
+    t = (struct node *)(malloc(sizeof(struct node))); // create new node t
+    t->data = x;                                      // assign value to t's data
+    t->next = NULL; // after new node is NULL
+
+    if (head == NULL) // if no nodes, then head node is t
+    {
+        head = t;
+    }
+    else
+    {
+        while (p && p->data < x) // when p is not null and p's data is < x
+        {                          // Ex: p's data = 8 < 22
+            q = p;
+            p = p->next;           // insert larger num after smaller num for sorted list
+        }
+
+        if (p == head) // if only one node, then t's next is the head and head is t
+        {
+            t->next = head;
+            head = t;
+        }
+        else
+        {
+            t->next = q->next; // move t to next, move q to next
+            q->next = t; // q will be moved to t location
+        }
+    }
+}
+
 // display the list
 void printList()
 {
@@ -240,6 +272,8 @@ int main()
 
     insertLast(14);
     insertLast(-7);
+
+    sortedInsert(head,9);
 
     count();
 
