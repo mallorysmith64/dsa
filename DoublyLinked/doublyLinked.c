@@ -109,6 +109,7 @@ int min(struct node *p)
     return min;
 }
 
+// iterative search for head node's key
 struct node *search(struct node *p, int key)
 {
     while (p != NULL)
@@ -124,12 +125,29 @@ struct node *search(struct node *p, int key)
     }
 }
 
+// recursive search for head node's key
+struct node *rSearch(struct node *p, int key)
+{
+    if (p == NULL)
+    {
+        printf("\n\n Key was not found.");
+        return NULL;
+    }
+
+    if (key == p->data)
+    {
+        printf("\n\n Key found recursively as %d", p->data);
+        return p;
+        return rSearch(p->next, key);
+    }
+}
+
 // display the list
 void printList()
 {
     struct node *ptr = head;
 
-    printf("\n[head] <=>");
+    printf("\n\n [head] <=>");
 
     //start from the beginning
     while (ptr->next != NULL)
@@ -160,6 +178,10 @@ int main()
     search(head, 2); // should be found in the beginning
     search(head, 4); // should not be found in the beginning
 
+    rSearch(head, 2);
+    rSearch(head,0);
+
     printList();
+
     return 0;
 }
