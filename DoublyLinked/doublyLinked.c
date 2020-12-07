@@ -109,6 +109,21 @@ int min(struct node *p)
     return min;
 }
 
+struct node *search(struct node *p, int key)
+{
+    while (p != NULL)
+    {
+        if (key == p->data)
+        {
+            printf("\n Key was found: %d", p->data);
+            return p;
+            p = p->next;
+        }
+        printf("\n Key searched was not found. The key found was %d.", p->data);
+        return NULL;
+    }
+}
+
 // display the list
 void printList()
 {
@@ -141,6 +156,9 @@ int main()
 
     max(head);
     min(head);
+
+    search(head, 2); // should be found in the beginning
+    search(head, 4); // should not be found in the beginning
 
     printList();
     return 0;
