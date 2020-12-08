@@ -205,8 +205,6 @@ void insertLast(int x)
     {
         tail->next = t; // move last node to t
         tail = t;       // last node is t
-        printf(tail);
-        return tail;
     }
 }
 
@@ -215,7 +213,7 @@ void sortedInsert(struct node *p, int x)
     struct node *t, *q = NULL;
     t = (struct node *)(malloc(sizeof(struct node))); // create new node t
     t->data = x;                                      // assign value to t's data
-    t->next = NULL; // after new node is NULL
+    t->next = NULL;                                   // after new node is NULL
 
     if (head == NULL) // if no nodes, then head node is t
     {
@@ -224,9 +222,9 @@ void sortedInsert(struct node *p, int x)
     else
     {
         while (p && p->data < x) // when p is not null and p's data is < x
-        {                          // Ex: p's data = 8 < 22
+        {                        // Ex: p's data = 8 < 22
             q = p;
-            p = p->next;           // insert larger num after smaller num for sorted list
+            p = p->next; // insert larger num after smaller num for sorted list
         }
 
         if (p == head) // if only one node, then t's next is the head and head is t
@@ -237,11 +235,36 @@ void sortedInsert(struct node *p, int x)
         else
         {
             t->next = q->next; // move t to next, move q to next
-            q->next = t; // q will be moved to t location
+            q->next = t;       // q will be moved to t location
         }
     }
 }
 
+int delete (struct node *p, int index)
+{
+    struct node *q; // 2 pointers required
+    int x = -1; int i;  // value to delete is int therefore return type will be int
+
+    if (index < 1 || index > count(p)) // check that indices are valid
+        return -1; // return -1 for invalid
+    if(index == 1) {
+        q = head;
+        x = head-> data; // save head's data before deleting node
+        head = head->next; // move head to next
+        delete; q; // delete q node
+        return x;
+    }
+    else {
+        for(i = 0; i < index - 1; i++) { // move position - 1 times
+        q = p; // q should move to p
+        p = p -> next;
+        }
+        q->next = p-> next;
+        x = p->data;
+        delete;p;
+    }
+    
+}
 // display the list
 void printList()
 {
@@ -273,7 +296,9 @@ int main()
     insertLast(14);
     insertLast(-7);
 
-    sortedInsert(head,9);
+    sortedInsert(head, 9);
+
+    delete(head,1);
 
     count();
 
