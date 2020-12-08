@@ -291,6 +291,27 @@ int delete (struct node *p, int index)
     }
 }
 
+// remove duplicates from SORTED list, will not work for unsorted!!
+int removeDuplicate(struct node *p) //first node
+{
+    struct node *q = p->next;
+
+    while (q != NULL)
+    {
+        if (p->data != q->data)
+        {
+            p = q;
+            q = q->next;
+        }
+        else
+        {
+            p->next = q->next;
+            free(q);
+            q = p->next;
+        }
+    }
+}
+
 // display the list
 void printList()
 {
@@ -312,6 +333,8 @@ void printList()
 int main()
 {
     create(2);
+    create(2); //duplicate
+    create(2); //duplicate
     create(4);
     create(8);
     create(10);
@@ -342,6 +365,7 @@ int main()
     moveSearch(head, 10);
 
     printf("\n Deleted element: %d", delete (head, 2));
+    removeDuplicate(head);
 
     printList(); // list will show 10 as first node b/c of moveSearch function being called
 
