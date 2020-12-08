@@ -43,6 +43,26 @@ void create(int data)
     link->prev = current;
 }
 
+// check if original list is sorted or not
+int isSorted(struct node *p)
+{
+
+    int x = INT_MIN; // check first node's value against min int
+
+    while (p != NULL)
+    {
+        if (p->data < x) // failure condition: if false, it's not sorted
+        {
+            printf("\n No, it's not sorted!");
+            return 0;
+            x = p->data;
+            p = p->next;
+        }
+        printf("\n Yes, it's sorted!");
+        return 1;
+    }
+}
+
 // find number of nodes in list
 int count()
 {
@@ -243,28 +263,34 @@ void sortedInsert(struct node *p, int x)
 int delete (struct node *p, int index)
 {
     struct node *q; // 2 pointers required
-    int x = -1; int i;  // value to delete is int therefore return type will be int
+    int x = -1;
+    int i; // value to delete is int therefore return type will be int
 
     if (index < 1 || index > count(p)) // check that indices are valid
-        return -1; // return -1 for invalid
-    if(index == 1) {
+        return -1;                     // return -1 for invalid
+    if (index == 1)
+    {
         q = head;
-        x = head-> data; // save head's data before deleting node
+        x = head->data;    // save head's data before deleting node
         head = head->next; // move head to next
-        delete; q; // delete q node
+        delete;
+        q; // delete q node
         return x;
     }
-    else {
-        for(i = 0; i < index - 1; i++) { // move position - 1 times
-        q = p; // q should move to p
-        p = p -> next;
+    else
+    {
+        for (i = 0; i < index - 1; i++)
+        {          // move position - 1 times
+            q = p; // q should move to p
+            p = p->next;
         }
-        q->next = p-> next;
+        q->next = p->next;
         x = p->data;
-        delete;p;
+        delete;
+        p;
     }
-    
 }
+
 // display the list
 void printList()
 {
@@ -285,11 +311,12 @@ void printList()
 
 int main()
 {
-
     create(2);
     create(4);
     create(8);
     create(10);
+
+    isSorted(head);
 
     insert(head, 0, 6); //insert at position, index, value as integer
 
@@ -297,8 +324,6 @@ int main()
     insertLast(-7);
 
     sortedInsert(head, 9);
-
-    delete(head,1);
 
     count();
 
@@ -315,6 +340,8 @@ int main()
     rSearch(head, 0);
 
     moveSearch(head, 10);
+
+    printf("\n Deleted element: %d", delete (head, 2));
 
     printList(); // list will show 10 as first node b/c of moveSearch function being called
 
