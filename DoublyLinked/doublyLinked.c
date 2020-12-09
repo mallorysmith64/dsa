@@ -324,13 +324,27 @@ void reverseElements(struct node *p)
         i++;            // increment array index
     }
     q = head; // after elements are in array, start at first pointer p
-    i--;   // decrement index to last element
+    i--;      // decrement index to last element
 
     while (q != NULL)
     {
         q->data = A[i--]; // copy array to linked list q node, decrement index
-        q = q->next;    // move to next q node
+        q = q->next;      // move to next q node
     }
+}
+
+void reverseLinks(struct node *p)
+{
+    struct node *q = NULL, *r = NULL;
+
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    head = q;
 }
 
 // display the list
@@ -388,7 +402,8 @@ int main()
     // printf("\n Deleted element: %d", delete (head, 2));
     // removeDuplicate(head);
 
-    reverseElements(head);
+    // reverseElements(head);
+    reverseLinks(head);
 
     printList(); // list will show 10 as first node b/c of moveSearch function being called
 
