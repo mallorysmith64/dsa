@@ -64,16 +64,14 @@ int isSorted(struct node *p)
 }
 
 // find number of nodes in list
-int count()
+int count(struct node *p)
 {
-    struct node *p = head;
     int c = 0;
     while (p != NULL)
     {
         c++;
         p = p->next;
     }
-    printf("\n Number of nodes: %d", c);
     return c;
 }
 
@@ -312,6 +310,29 @@ int removeDuplicate(struct node *p) //first node
     }
 }
 
+// reverse linked list elements via array
+void reverseElements(struct node *p)
+{
+    int *A, i = 0;
+    struct node *q = head; // must have a pointer on head node!!
+
+    A = (int *)malloc(sizeof(int) * count(p)); // get size of linked list
+    while (q != NULL)
+    {
+        A[i] = q->data; //copy q's data to array
+        q = q->next;    // move to next q node
+        i++;            // increment array index
+    }
+    q = head; // after elements are in array, start at first pointer p
+    i--;   // decrement index to last element
+
+    while (q != NULL)
+    {
+        q->data = A[i--]; // copy array to linked list q node, decrement index
+        q = q->next;    // move to next q node
+    }
+}
+
 // display the list
 void printList()
 {
@@ -339,33 +360,35 @@ int main()
     create(8);
     create(10);
 
-    isSorted(head);
+    // isSorted(head);
 
-    insert(head, 0, 6); //insert at position, index, value as integer
+    // insert(head, 0, 6); //insert at position, index, value as integer
 
-    insertLast(14);
-    insertLast(-7);
+    // insertLast(14);
+    // insertLast(-7);
 
-    sortedInsert(head, 9);
+    // sortedInsert(head, 9);
 
-    count();
+    // count(head);
 
-    add();
-    recursiveAdd();
+    // add();
+    // recursiveAdd();
 
-    max(head);
-    min(head);
+    // max(head);
+    // min(head);
 
-    search(head, 2); // should be found in the beginning
-    search(head, 4); // should not be found in the beginning
+    // search(head, 2); // should be found in the beginning
+    // search(head, 4); // should not be found in the beginning
 
-    rSearch(head, 2);
-    rSearch(head, 0);
+    // rSearch(head, 2);
+    // rSearch(head, 0);
 
-    moveSearch(head, 10);
+    // moveSearch(head, 10);
 
-    printf("\n Deleted element: %d", delete (head, 2));
-    removeDuplicate(head);
+    // printf("\n Deleted element: %d", delete (head, 2));
+    // removeDuplicate(head);
+
+    reverseElements(head);
 
     printList(); // list will show 10 as first node b/c of moveSearch function being called
 
