@@ -333,6 +333,7 @@ void reverseElements(struct node *p)
     }
 }
 
+// reverse links to revese linked list
 void reverseLinks(struct node *p)
 {
     struct node *q = NULL, *r = NULL;
@@ -345,6 +346,20 @@ void reverseLinks(struct node *p)
         q->next = r;
     }
     head = q;
+}
+
+// recursively reverse linked list
+void rReverse(struct node *q, struct node *p) // need 2 pointers
+{
+    if (p != NULL)
+    {
+        rReverse(p, p->next);
+        p->next = q;
+    }
+    else
+    {
+        head = q;
+    }
 }
 
 // display the list
@@ -403,7 +418,8 @@ int main()
     // removeDuplicate(head);
 
     // reverseElements(head);
-    reverseLinks(head);
+    // reverseLinks(head);
+    rReverse(NULL,head);
 
     printList(); // list will show 10 as first node b/c of moveSearch function being called
 
