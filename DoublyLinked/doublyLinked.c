@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <limits.h> //needed for INT_MIN
 
-// doubly linked list has 2 pointers: next and prev
+// doubly ped list has 2 pointers: next and prev
 struct node
 {
     int data;
@@ -11,23 +11,25 @@ struct node
 };
 
 struct node *head = NULL; //global decration of head node
+struct node *second = NULL;
+struct node *third = NULL;
 struct node *tail = NULL;
 struct node *current = NULL;
 
-// create the list
+// create first list
 void create(int data)
 {
     // allocate memory for new node
-    struct node *link = (struct node *)malloc(sizeof(struct node));
+    struct node *p = (struct node *)malloc(sizeof(struct node));
 
-    link->data = data;
-    link->prev = NULL;
-    link->next = NULL;
+    p->data = data;
+    p->prev = NULL;
+    p->next = NULL;
 
     // if head is empty, create a new list
     if (head == NULL)
     {
-        head = link;
+        head = p;
         return;
     }
 
@@ -37,10 +39,39 @@ void create(int data)
     while (current->next != NULL)
         current = current->next;
 
-    // insert link at the end of the list
-    current->next = link;
-    tail = link;
-    link->prev = current;
+    // insert p at the end of the list
+    current->next = p;
+    tail = p;
+    p->prev = current;
+}
+
+// create second list
+void create2(int data)
+{
+    // allocate memory for new node
+    struct node *p = (struct node *)malloc(sizeof(struct node));
+
+    p->data = data;
+    p->prev = NULL;
+    p->next = NULL;
+
+    // if head is empty, create a new list
+    if (head == NULL)
+    {
+        head = p;
+        return;
+    }
+
+    current = head;
+
+    // move to the end of the list
+    while (current->next != NULL)
+        current = current->next;
+
+    // insert p at the end of the list
+    current->next = p;
+    tail = p;
+    p->prev = current;
 }
 
 // check if original list is sorted or not
@@ -99,7 +130,7 @@ int recursiveAdd()
     return recursiveAdd(p->next) + p->data;
 }
 
-// max value in linked list
+// max value in ped list
 int max(struct node *p)
 {
     int max = INT_MIN; //INT_MIN is -2147483648
@@ -113,7 +144,7 @@ int max(struct node *p)
     return max;
 }
 
-// max value in linked list
+// max value in ped list
 int min(struct node *p)
 {
     int min = INT_MAX; //INT_MIN is -2147483648
@@ -193,8 +224,8 @@ void insert(struct node *p, int index, int x) //pos means position
 
         if (index == 0) // steps for inserting before first node
         {
-            t->next = head; // modify link 1: point t node to head
-            head = t;       // modify link 2: point head to t node
+            t->next = head; // modify p 1: point t node to head
+            head = t;       // modify p 2: point head to t node
         }
         else
         {
@@ -310,13 +341,13 @@ int removeDuplicate(struct node *p) //first node
     }
 }
 
-// reverse linked list elements via array
+// reverse ped list elements via array
 void reverseElements(struct node *p)
 {
     int *A, i = 0;
     struct node *q = head; // must have a pointer on head node!!
 
-    A = (int *)malloc(sizeof(int) * count(p)); // get size of linked list
+    A = (int *)malloc(sizeof(int) * count(p)); // get size of ped list
     while (q != NULL)
     {
         A[i] = q->data; //copy q's data to array
@@ -328,12 +359,12 @@ void reverseElements(struct node *p)
 
     while (q != NULL)
     {
-        q->data = A[i--]; // copy array to linked list q node, decrement index
+        q->data = A[i--]; // copy array to ped list q node, decrement index
         q = q->next;      // move to next q node
     }
 }
 
-// reverse links to revese linked list
+// reverse links to reverse linked list
 void reverseLinks(struct node *p)
 {
     struct node *q = NULL, *r = NULL;
@@ -348,7 +379,7 @@ void reverseLinks(struct node *p)
     head = q;
 }
 
-// recursively reverse linked list
+// recursively reverse ped list
 void rReverse(struct node *q, struct node *p) // need 2 pointers
 {
     if (p != NULL)
@@ -365,18 +396,18 @@ void rReverse(struct node *q, struct node *p) // need 2 pointers
 // display the list
 void printList()
 {
-    struct node *ptr = head;
+    struct node *p = head;
 
     printf("\n\n [head] <=>");
 
     //start from the beginning
-    while (ptr->next != NULL)
+    while (p->next != NULL)
     {
-        printf(" %d <=>", ptr->data);
-        ptr = ptr->next;
+        printf(" %d <=>", p->data);
+        p = p->next;
     }
 
-    printf(" %d <=>", ptr->data);
+    printf(" %d <=>", p->data);
     printf(" [head]\n");
 }
 
@@ -388,6 +419,13 @@ int main()
     create(4);
     create(8);
     create(10);
+
+    create2(1);
+    create2(2);
+    create2(3);
+    create2(4);
+    create2(5);
+    create2(6);
 
     // isSorted(head);
 
@@ -418,8 +456,8 @@ int main()
     // removeDuplicate(head);
 
     // reverseElements(head);
-    // reverseLinks(head);
-    rReverse(NULL,head);
+    // reversLinks(head);
+    // rReverse(NULL, head);
 
     printList(); // list will show 10 as first node b/c of moveSearch function being called
 
