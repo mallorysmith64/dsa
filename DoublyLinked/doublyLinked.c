@@ -393,6 +393,17 @@ void rReverse(struct node *q, struct node *p) // need 2 pointers
     }
 }
 
+// concatenate two linked lists
+void concat()
+{
+    struct node *p = head, *q = second; // 2 pointers
+    third = p;
+
+    while (head->next != NULL)
+        p = head->next;
+    head->next = q;
+}
+
 // display the list
 void printList()
 {
@@ -459,7 +470,8 @@ int main()
     // reversLinks(head);
     // rReverse(NULL, head);
 
-    printList(); // list will show 10 as first node b/c of moveSearch function being called
+    // printf("concatinated\n");
+    printList(head); // list will show 10 as first node b/c of moveSearch function being called
 
     return 0;
 }
