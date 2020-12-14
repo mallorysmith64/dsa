@@ -3,24 +3,24 @@
 #include <limits.h>
 
 // In C, we can represent a node using structures
-struct Node
+struct node
 {
     int data;
-    struct Node *next;
+    struct node *next;
 } *head = NULL, *second = NULL, *third = NULL;
 
 void create(int A[], int n)
 {
     int i;
-    struct Node *t, *last;
-    head = (struct Node *)malloc(sizeof(struct Node));
+    struct node *t, *last;
+    head = (struct node *)malloc(sizeof(struct node));
     head->data = A[0];
     head->next = NULL;
     last = head;
 
     for (i = 1; i < n; i++)
     {
-        t = (struct Node *)malloc(sizeof(struct Node));
+        t = (struct node *)malloc(sizeof(struct node));
         t->data = A[i];
         t->next = NULL;
         last->next = t;
@@ -31,15 +31,15 @@ void create(int A[], int n)
 void create2(int A[], int n)
 {
     int i;
-    struct Node *t, *last;
-    second = (struct Node *)malloc(sizeof(struct Node));
+    struct node *t, *last;
+    second = (struct node *)malloc(sizeof(struct node));
     second->data = A[0];
     second->next = NULL;
     last = second;
 
     for (i = 1; i < n; i++)
     {
-        t = (struct Node *)malloc(sizeof(struct Node));
+        t = (struct node *)malloc(sizeof(struct node));
         t->data = A[i];
         t->next = NULL;
         last->next = t;
@@ -47,20 +47,58 @@ void create2(int A[], int n)
     }
 }
 
-void displayList(struct Node *p)
+void displayList(struct node *p)
 {
-    // use while loop b/c we do not know how many nodes they are
-    // print the data, then move to next node, then print the data, move to next node
-    // condition: stop when n points to NULL or 0
-    printf("\n\n [head] <->");
     while (p != NULL)
     {
-        printf("%d <->", p->data);
+        printf("-> %d", p->data);
         p = p->next;
     }
 }
 
-void reverseList(struct Node *n)
+// merge two linked lists
+void merge(struct node *p, struct node *q)
+{
+    struct node *last;
+
+    if (p->data < q->data)
+    {
+        third = last = p;
+        p = p->next;
+        third->next = NULL;
+    }
+    else
+    {
+        third = last = q;
+        q = q->next;
+        third->next = NULL;
+    }
+
+    while (p && q)
+    {
+        if (p->data < q->data)
+        {
+            last->next = p;
+            last = p;
+            p = p->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = q;
+            last = q;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+    if (p)
+        last->next = p;
+
+    if (q)
+        last->next = q;
+}
+
+void reverseList(struct node *n)
 {
     // call function recursively and then print data until n is null or 0
     if (n != NULL)
@@ -74,14 +112,14 @@ void reverseList(struct Node *n)
 int main()
 {
     int A[] = {2, 2, 2, 4, 8, 10};
-    int B[] = {15, 18, 7, 30, 55};
+    int B[] = {15, 18, 7, 30, 55, 7};
     create(A, 6);
     create2(B, 6);
 
-    displayList(head);
-    displayList(second);
+    merge(head, second);
+    displayList(third);
 
-    reverseList(head);
+    // reverseList(head);
 
     return 0;
 }

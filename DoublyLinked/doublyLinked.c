@@ -8,13 +8,7 @@ struct node
     int data;
     struct node *prev;
     struct node *next;
-};
-
-struct node *head = NULL; //global decration of head node
-struct node *second = NULL;
-struct node *third = NULL;
-struct node *tail = NULL;
-struct node *current = NULL;
+}*head = NULL, *second = NULL, *third = NULL, *tail = NULL, *current = NULL;
 
 // create first list
 void create(int data)
@@ -404,6 +398,7 @@ void concat()
     head->next = q;
 }
 
+
 // display the list
 void printList()
 {
@@ -470,8 +465,9 @@ int main()
     // reversLinks(head);
     // rReverse(NULL, head);
 
-    // printf("concatinated\n");
-    printList(head); // list will show 10 as first node b/c of moveSearch function being called
+    merge(head, second);
+
+    printList(third); // list will show 10 as first node b/c of moveSearch function being called
 
     return 0;
 }
