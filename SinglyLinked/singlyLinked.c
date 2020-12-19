@@ -108,6 +108,20 @@ void reverseList(struct node *n)
     }
 }
 
+// find middle node
+struct node *middleNode(struct node *head)
+{
+    struct node *fast = head, *slow = head; // two pointers: fast and slow
+
+    while (fast != NULL && fast->next != NULL) // check fast and fast next
+    {
+        fast = fast->next->next; // move fast one more than slow
+        slow = slow->next;
+    }
+    printf("Middle node is: %d \n", slow->data);
+    return slow;
+}
+
 // create linked list
 int main()
 {
@@ -116,8 +130,12 @@ int main()
     create(A, 6);
     create2(B, 6);
 
-    merge(head, second);
-    displayList(third);
+    // merge linked list below:
+    // merge(head, second);
+    // displayList(third);
+
+    middleNode(head);
+    displayList(head);
 
     // reverseList(head);
 
