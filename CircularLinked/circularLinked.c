@@ -32,23 +32,23 @@ void Display(struct node *p)
 {
     do
     {
-        printf(" %d -> ", p->data); // print and move to next node
+        printf("%d -> ", p->data); // print and move to next node
         p = p->next;
     } while (p != head);
 }
 
 // print out circular list recursively
-// void Rdisplay(struct node *p)
-// {
-//     static int flag = 0; // indicates if it's the first or second time transversing
-//     if (p != head || flag == 0)
-//     { // first time p is equal to head but flag is zero
-//         flag = 1;
-//         printf("%d -> ", p->data);
-//         Rdisplay(p->next);
-//     }
-//         flag = 0;
-// }
+void Rdisplay(struct node *p)
+{
+    static int flag = 0; // indicates if it's the first or second time transversing
+    if (p != head || flag == 0)
+    { // first time p is equal to head but flag is zero
+        flag = 1;
+        printf("%d -> ", p->data);
+        Rdisplay(p->next);
+    }
+        flag = 0;
+}
 
 int main()
 {
@@ -56,7 +56,9 @@ int main()
     create(A, 5);
 
     Display(head);
-    // Rdisplay(head);
+    
+    printf("\n");
+    Rdisplay(head);
 
     return 0;
 }
