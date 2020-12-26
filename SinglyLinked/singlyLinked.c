@@ -122,20 +122,49 @@ struct node *middleNode(struct node *head)
     return slow;
 }
 
+// check if linked list has a loop or is linear
+int isLoop(struct node *f)
+{
+    struct node *p, *q;
+    p = q = f;
+
+    do
+    {
+        p = p->next;
+        q = q->next;
+        q = q ? q->next : q;
+    } while (p && q && p != q);
+    {
+        if (p == q)
+            return 1; // yes, there is a loop
+        else
+            return 0; // no, the the linked list is linear
+    }
+}
+
 // create linked list
 int main()
 {
+    struct node *t1, *t2;
+
     int A[] = {2, 2, 2, 4, 8, 10};
-    int B[] = {15, 18, 7, 30, 55, 7};
+    // int B[] = {15, 18, 7, 30, 55, 7};
     create(A, 6);
-    create2(B, 6);
+
+    t1 = head->next->next;                   // 2
+    t2 = head->next->next->next->next->next; // last node
+    t2->next = t1;                           // last node should point to t1's node for there to be a loop
+
+    printf("%d \n", isLoop(head));
+
+    // create2(B, 6);
 
     // merge linked list below:
     // merge(head, second);
     // displayList(third);
 
-    middleNode(head);
-    displayList(head);
+    // middleNode(head);
+    // displayList(head);
 
     // reverseList(head);
 
