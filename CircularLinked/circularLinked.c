@@ -101,17 +101,55 @@ void insert(struct node *p, int index, int x)
     }
 }
 
+// delete node
+int delete (struct node *p, int index)
+{
+    struct node *q;
+    int i, x;
+
+    if (index < 0 || index > Length(head)) // check indices are valid
+        return -1;
+
+    if (index == 1) // if there is only one node
+    {
+        while (p->next != head)
+            p = p->next;
+            x = head->data;
+        if (head == p)
+        {
+            free(head);
+            head = NULL;
+        }
+        else
+        {
+            p->next = head->next;
+            free(head);
+            head = p->next;
+        }
+    }
+    else
+    {
+        for (i = 0; i < index - 2; i++) // delete at given position by moving index - 2 times
+            p = p->next;
+            q = p->next;
+            p->next = q->next;
+            x = q->data;
+            free(q);
+    }
+    return x;
+}
+
 int main()
 {
-    int A[] = {2, 2, 2, 4, 8};
+    int A[] = {1, 2, 3, 4, 5};
     create(A, 5);
 
-    insert(head, 2, 10); // insert at node, index, value
-
+    delete (head, 2); // delete at node, index
     Rdisplay(head);
 
     return 0;
 }
 
+// insert(head, 2, 10); // insert at node, index, value
 // Display(head);
 // printf("\n");
