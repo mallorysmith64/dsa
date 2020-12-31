@@ -8,64 +8,52 @@ struct node
     int data;
     struct node *prev;
     struct node *next;
-}*head = NULL, *second = NULL, *third = NULL, *tail = NULL, *current = NULL;
+} *head = NULL, *second = NULL, *third = NULL, *tail = NULL, *current = NULL;
 
 // create first list
-void create(int data)
+void create(int A[], int n)
 {
+    struct node *t, *last;
+    int i;
     // allocate memory for new node
-    struct node *p = (struct node *)malloc(sizeof(struct node));
+    head = (struct node *)malloc(sizeof(struct node));
 
-    p->data = data;
-    p->prev = NULL;
-    p->next = NULL;
+    head->data = A[0];
+    head->prev = head->next = NULL;
+    last = head;
 
-    // if head is empty, create a new list
-    if (head == NULL)
+    for (i = 1; i < n; i++)
     {
-        head = p;
-        return;
+        t = (struct node *)malloc(sizeof(struct node));
+        t->data = A[i];
+        t->next = last->next;
+        t->prev = last;
+        last->next = t;
+        last = t;
     }
-
-    current = head;
-
-    // move to the end of the list
-    while (current->next != NULL)
-        current = current->next;
-
-    // insert p at the end of the list
-    current->next = p;
-    tail = p;
-    p->prev = current;
 }
 
 // create second list
-void create2(int data)
+void create2(int A[], int n)
 {
+    struct node *t, *last;
+    int i;
     // allocate memory for new node
-    struct node *p = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
 
-    p->data = data;
-    p->prev = NULL;
-    p->next = NULL;
+    second->data = A[0];
+    second->prev = head->next = NULL;
+    last = head;
 
-    // if head is empty, create a new list
-    if (head == NULL)
+    for (i = 1; i < n; i++)
     {
-        head = p;
-        return;
+        t = (struct node *)malloc(sizeof(struct node));
+        t->data = A[i];
+        t->next = last->next;
+        t->prev = last;
+        last->next = t;
+        last = t;
     }
-
-    current = head;
-
-    // move to the end of the list
-    while (current->next != NULL)
-        current = current->next;
-
-    // insert p at the end of the list
-    current->next = p;
-    tail = p;
-    p->prev = current;
 }
 
 // check if original list is sorted or not
@@ -398,12 +386,9 @@ void concat()
     head->next = q;
 }
 
-
 // display the list
-void printList()
+void printList(struct node *p)
 {
-    struct node *p = head;
-
     printf("\n\n [head] <=>");
 
     //start from the beginning
@@ -419,55 +404,48 @@ void printList()
 
 int main()
 {
-    create(2);
-    create(2); //duplicate
-    create(2); //duplicate
-    create(4);
-    create(8);
-    create(10);
+    int A[] = {2, 3, 4, 5, 6, 7, 8};
+    int B[] = {9, 8, 7, 6, 5, 4, 3};
+    create(A, 7);
+    create(B, 7);
 
-    create2(1);
-    create2(2);
-    create2(3);
-    create2(4);
-    create2(5);
-    create2(6);
-
-    // isSorted(head);
-
-    // insert(head, 0, 6); //insert at position, index, value as integer
-
-    // insertLast(14);
-    // insertLast(-7);
-
-    // sortedInsert(head, 9);
-
-    // count(head);
-
-    // add();
-    // recursiveAdd();
-
-    // max(head);
-    // min(head);
-
-    // search(head, 2); // should be found in the beginning
-    // search(head, 4); // should not be found in the beginning
-
-    // rSearch(head, 2);
-    // rSearch(head, 0);
-
-    // moveSearch(head, 10);
-
-    // printf("\n Deleted element: %d", delete (head, 2));
-    // removeDuplicate(head);
-
-    // reverseElements(head);
-    // reversLinks(head);
-    // rReverse(NULL, head);
-
-    merge(head, second);
-
-    printList(third); // list will show 10 as first node b/c of moveSearch function being called
+    printf("\n Length is: %d\n", count(head));
 
     return 0;
 }
+
+// isSorted(head);
+
+// insert(head, 0, 6); //insert at position, index, value as integer
+
+// insertLast(14);
+// insertLast(-7);
+
+// sortedInsert(head, 9);
+
+// count(head);
+
+// add();
+// recursiveAdd();
+
+// max(head);
+// min(head);
+
+// search(head, 2); // should be found in the beginning
+// search(head, 4); // should not be found in the beginning
+
+// rSearch(head, 2);
+// rSearch(head, 0);
+
+// moveSearch(head, 10);
+
+// printf("\n Deleted element: %d", delete (head, 2));
+// removeDuplicate(head);
+
+// reverseElements(head);
+// reversLinks(head);
+// rReverse(NULL, head);
+
+// merge(head, second);
+
+// printList(third); // list will show 10 as first node b/c of moveSearch function being called
