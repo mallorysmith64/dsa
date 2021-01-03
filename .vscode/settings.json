@@ -2,5 +2,6 @@
     "cSpell.words": [
         "isfull",
         "operations"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "Disabled"
 }
