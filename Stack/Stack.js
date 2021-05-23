@@ -45,10 +45,10 @@ const stack = new Stack();
 
 // perform operations
 stack.isEmpty();
-stack.getLength();
 
 stack.push("dog");
 stack.push("cat");
+stack.getLength();
 
 stack.peek();
 

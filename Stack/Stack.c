@@ -6,10 +6,16 @@ int stack[8];
 // top is same as size in the js file
 int top = -1;
 
-// return element at the top of stack without modifying
+// peek means to check value of specific index
 int peek()
 {
-    return stack[top];
+    if (top == -1)
+    {
+        printf("Stack is Empty! \n");
+        return -1;
+    }
+    else
+        return (stack[top]);
 }
 
 // cannot add if stack is full
@@ -48,14 +54,15 @@ int pop(int element)
 // test stack by performing operations
 int main()
 {
-    printf("Top of Stack is: %d\n", peek());
 
     push(3);
     push(6);
     push(9);
     push(11);
 
-    pop(9);
+    pop(11);
+
+    printf("\nTop of Stack is: %d\n", peek()); // call peek after adding/removing elements
 
     return 0;
 }
