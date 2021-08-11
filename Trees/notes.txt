@@ -1,0 +1,55 @@
+Tree Properties:
+- 1. Non-Linear (no path to take, start anywhere)
+- 2. Hierarchical 
+(only go from node to children and NOT the other way around, 
+nodes do NOT have reference to the parent/previous nodes, can only go left and right)
+
+Ex: new Node("B") -> {val: "B", left:null, right:null }
+
+- 3. Acyclic
+
+- 4. Recursive
+There are multiple trees within a binary trees
+The entire tree is one tree, within that tree there is another and another
+
+Terms:
+Levels -
+Level 0 is the root node
+Level 1 is all the nodes after the root node
+
+Depth similar to level, but level refers to all nodes in level
+
+Height - maximum edges of node to farthest leaf, 
+count edges from bottom to top or from a node to a leaf
+
+** The difference between depth and height is the reference point.
+
+Siblings - nodes with the same parent, nodes can be on the same level and also NOT be siblings!
+Leaf nodes - nodes with zero children
+
+Where do you use binary search trees?
+- The DOM
+Start at the document and branch out
+
+Trees will have edges that are (nodes - 1). 
+Ex: 3 nodes will have 2 edges
+    2 nodes will have 1 edges
+
+--------------------------
+BST (Binary Search Tree)
+
+To qualify as a BST:
+- values on the left subtree must be less than the root node
+- values on the right subtree must be greater than the root node
+- nodes can only have two children, if there is more it's NOT a valid BST
+- any data with order can be presented as a BST, 
+so a BST with letters can be valid if on the left the letters are before the root node's letter
+and on the right the letters are after the root node letter
+- you CANNOT have multiple parents
+- think of valid BST as far as subtrees not individual nodes
+
+Practice:
+1. find(val) method
+2. insert(val) method
+3. remove(val) method
+
